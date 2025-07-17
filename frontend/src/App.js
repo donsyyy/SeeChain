@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
-import WalletConnector from './components/WalletConnector';
-import TokenManagementForm from './components/CreateTokenForm';
-import EarnTokensForm from './components/EarnTokensForm';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import SignInPage from './pages/SignInPage';
+import RegisterPage from './pages/RegisterPage';
+import DashboardPage from './pages/DashboardPage';
+import ShipmentVisualizer from './pages/ShipmentVisualizer';
 import './App.css';
 
 function App() {
-  const [currentAccount, setCurrentAccount] = useState(null);
-
   return (
-    <div className="App App-header">
-      <img src={""} className="App-logo" alt="LoyalLoop" />
-      <h1>LoyalLoop</h1>
-      <WalletConnector onAccountChange={setCurrentAccount} />
-      <TokenManagementForm />
-      <hr/>
-      <EarnTokensForm currentAccount={currentAccount} />
-      <hr/>
-      <p>
-        Welcome to LoyalLoop, your gateway to seamless loyalty rewards.
-      </p>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/shipment/:id" element={<ShipmentVisualizer />} />
+      </Routes>
+    </Router>
   );
 }
 
